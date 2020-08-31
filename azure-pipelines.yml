@@ -43,18 +43,21 @@ jobs:
           command: 'test'
           arguments: '-v ./... -cover'
           workingDirectory: '$(System.DefaultWorkingDirectory)'
+
   - job:
     displayName: integration-test
     strategy:
       matrix:
         FABRIC_20:
-          FABRIC_VERSION: '2.2'
-          INTERGATION_CASE: 'ANDLogic'
-        FABRIC_14:
-          FABRIC_VERSION: '1.4'
+          FABRIC_VERSION: '22'
           INTERGATION_CASE: 'ANDLogic'
         FABRIC_20_ORLogic:
-          FABRIC_VERSION: '2.2'
+          FABRIC_VERSION: '22'
           INTERGATION_CASE: 'ORLogic'
+        FABRIC_14:
+          FABRIC_VERSION: '14'
+          INTERGATION_CASE: 'ANDLogic'
+        LATEST:
+          FABRIC_VERSION: ''
     steps:
       - script: ./test/integration-test.sh $(FABRIC_VERSION) $(INTERGATION_CASE)
